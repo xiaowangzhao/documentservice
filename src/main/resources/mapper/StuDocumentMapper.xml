@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.test.demo.mapper.StuDocumentMapper">
+  <resultMap id="BaseResultMap" type="com.test.demo.entity.StuDocument">
+    <id column="stuid" jdbcType="VARCHAR" property="stuid" />
+    <result column="substuid" jdbcType="BIGINT" property="substuid" />
+    <result column="paper" jdbcType="VARCHAR" property="paper" />
+    <result column="translation" jdbcType="VARCHAR" property="translation" />
+    <result column="sourcecode" jdbcType="VARCHAR" property="sourcecode" />
+    <result column="paperblind" jdbcType="VARCHAR" property="paperblind" />
+    <result column="assesspass" jdbcType="CHAR" property="assesspass" />
+    <result column="assesstid" jdbcType="CHAR" property="assesstid" />
+    <result column="assessdate" jdbcType="TIMESTAMP" property="assessdate" />
+    <result column="operator" jdbcType="VARCHAR" property="operator" />
+    <result column="operatedtime" jdbcType="TIMESTAMP" property="operatedtime" />
+    <result column="paperstatus" jdbcType="CHAR" property="paperstatus" />
+    <result column="paperblindstatus" jdbcType="CHAR" property="paperblindstatus" />
+    <result column="translationstatus" jdbcType="CHAR" property="translationstatus" />
+    <result column="sourcecodestatus" jdbcType="CHAR" property="sourcecodestatus" />
+  </resultMap>
+
+
+  <sql id="Base_Column_List">
+    stuid, substuid, paper, translation, sourcecode, paperblind, assesspass, assesstid, 
+    assessdate, operator, operatedtime, paperstatus, paperblindstatus, translationstatus, 
+    sourcecodestatus
+  </sql>
+
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from tb_stusubdoc
+    where stuid = #{stuid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from tb_stusubdoc
+    where stuid = #{stuid,jdbcType=VARCHAR}
+  </delete>
+
+  <insert id="insert" parameterType="com.test.demo.entity.StuDocument">
+    insert into tb_stusubdoc (stuid, substuid, paper, 
+      translation, sourcecode, paperblind, 
+      assesspass, assesstid, assessdate, 
+      operator, operatedtime, paperstatus, 
+      paperblindstatus, translationstatus, sourcecodestatus
+      )
+    values (#{stuid,jdbcType=VARCHAR}, #{substuid,jdbcType=BIGINT}, #{paper,jdbcType=VARCHAR}, 
+      #{translation,jdbcType=VARCHAR}, #{sourcecode,jdbcType=VARCHAR}, #{paperblind,jdbcType=VARCHAR}, 
+      #{assesspass,jdbcType=CHAR}, #{assesstid,jdbcType=CHAR}, #{assessdate,jdbcType=TIMESTAMP}, 
+      #{operator,jdbcType=VARCHAR}, #{operatedtime,jdbcType=TIMESTAMP}, #{paperstatus,jdbcType=CHAR}, 
+      #{paperblindstatus,jdbcType=CHAR}, #{translationstatus,jdbcType=CHAR}, #{sourcecodestatus,jdbcType=CHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.test.demo.entity.StuDocument">
+    insert into tb_stusubdoc
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="stuid != null">
+        stuid,
+      </if>
+      <if test="substuid != null">
+        substuid,
+      </if>
+      <if test="paper != null">
+        paper,
+      </if>
+      <if test="translation != null">
+        translation,
+      </if>
+      <if test="sourcecode != null">
+        sourcecode,
+      </if>
+      <if test="paperblind != null">
+        paperblind,
+      </if>
+      <if test="assesspass != null">
+        assesspass,
+      </if>
+      <if test="assesstid != null">
+        assesstid,
+      </if>
+      <if test="assessdate != null">
+        assessdate,
+      </if>
+      <if test="operator != null">
+        operator,
+      </if>
+      <if test="operatedtime != null">
+        operatedtime,
+      </if>
+      <if test="paperstatus != null">
+        paperstatus,
+      </if>
+      <if test="paperblindstatus != null">
+        paperblindstatus,
+      </if>
+      <if test="translationstatus != null">
+        translationstatus,
+      </if>
+      <if test="sourcecodestatus != null">
+        sourcecodestatus,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="stuid != null">
+        #{stuid,jdbcType=VARCHAR},
+      </if>
+      <if test="substuid != null">
+        #{substuid,jdbcType=BIGINT},
+      </if>
+      <if test="paper != null">
+        #{paper,jdbcType=VARCHAR},
+      </if>
+      <if test="translation != null">
+        #{translation,jdbcType=VARCHAR},
+      </if>
+      <if test="sourcecode != null">
+        #{sourcecode,jdbcType=VARCHAR},
+      </if>
+      <if test="paperblind != null">
+        #{paperblind,jdbcType=VARCHAR},
+      </if>
+      <if test="assesspass != null">
+        #{assesspass,jdbcType=CHAR},
+      </if>
+      <if test="assesstid != null">
+        #{assesstid,jdbcType=CHAR},
+      </if>
+      <if test="assessdate != null">
+        #{assessdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="operator != null">
+        #{operator,jdbcType=VARCHAR},
+      </if>
+      <if test="operatedtime != null">
+        #{operatedtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="paperstatus != null">
+        #{paperstatus,jdbcType=CHAR},
+      </if>
+      <if test="paperblindstatus != null">
+        #{paperblindstatus,jdbcType=CHAR},
+      </if>
+      <if test="translationstatus != null">
+        #{translationstatus,jdbcType=CHAR},
+      </if>
+      <if test="sourcecodestatus != null">
+        #{sourcecodestatus,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+
+
+  <update id="updateByPrimaryKeySelective" parameterType="com.test.demo.entity.StuDocument">
+    update tb_stusubdoc
+    <set>
+      <if test="substuid != null">
+        substuid = #{substuid,jdbcType=BIGINT},
+      </if>
+      <if test="paper != null">
+        paper = #{paper,jdbcType=VARCHAR},
+      </if>
+      <if test="translation != null">
+        translation = #{translation,jdbcType=VARCHAR},
+      </if>
+      <if test="sourcecode != null">
+        sourcecode = #{sourcecode,jdbcType=VARCHAR},
+      </if>
+      <if test="paperblind != null">
+        paperblind = #{paperblind,jdbcType=VARCHAR},
+      </if>
+      <if test="assesspass != null">
+        assesspass = #{assesspass,jdbcType=CHAR},
+      </if>
+      <if test="assesstid != null">
+        assesstid = #{assesstid,jdbcType=CHAR},
+      </if>
+      <if test="assessdate != null">
+        assessdate = #{assessdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="operator != null">
+        operator = #{operator,jdbcType=VARCHAR},
+      </if>
+      <if test="operatedtime != null">
+        operatedtime = #{operatedtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="paperstatus != null">
+        paperstatus = #{paperstatus,jdbcType=CHAR},
+      </if>
+      <if test="paperblindstatus != null">
+        paperblindstatus = #{paperblindstatus,jdbcType=CHAR},
+      </if>
+      <if test="translationstatus != null">
+        translationstatus = #{translationstatus,jdbcType=CHAR},
+      </if>
+      <if test="sourcecodestatus != null">
+        sourcecodestatus = #{sourcecodestatus,jdbcType=CHAR},
+      </if>
+    </set>
+    where stuid = #{stuid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.test.demo.entity.StuDocument">
+    update tb_stusubdoc
+    set substuid = #{substuid,jdbcType=BIGINT},
+      paper = #{paper,jdbcType=VARCHAR},
+      translation = #{translation,jdbcType=VARCHAR},
+      sourcecode = #{sourcecode,jdbcType=VARCHAR},
+      paperblind = #{paperblind,jdbcType=VARCHAR},
+      assesspass = #{assesspass,jdbcType=CHAR},
+      assesstid = #{assesstid,jdbcType=CHAR},
+      assessdate = #{assessdate,jdbcType=TIMESTAMP},
+      operator = #{operator,jdbcType=VARCHAR},
+      operatedtime = #{operatedtime,jdbcType=TIMESTAMP},
+      paperstatus = #{paperstatus,jdbcType=CHAR},
+      paperblindstatus = #{paperblindstatus,jdbcType=CHAR},
+      translationstatus = #{translationstatus,jdbcType=CHAR},
+      sourcecodestatus = #{sourcecodestatus,jdbcType=CHAR}
+    where stuid = #{stuid,jdbcType=VARCHAR}
+  </update>
+  
+  <update id="updateDoc"  statementType="STATEMENT" >
+        update tb_stusubdoc set ${doctype}='${file}',${doctype}status='1' where stuid='${stuid}'
+  </update>
+
+  <insert id="insertnew"  statementType="STATEMENT" >
+        insert  into tb_stusubdoc(stuid,${doctype},${doctype}status) values ('${stuid}','${file}','1')
+  </insert>
+
+  <select id="getUploadstatus" resultType="map" statementType="STATEMENT">
+    select ${doctype}status,${doctype} from tb_stusubdoc where stuid='${stuid}'
+  </select>
+
+  <update id="submitDocForTea" statementType="STATEMENT">
+     update tb_stusubdoc set ${doctype}status='${status}' where stuid='${stuid}'
+  </update>
+
+  <select id="getStuDocsBySpec" resultMap="BaseResultMap">
+    select a.stuid,sname,classname,paperblindstatus,paperstatus,translationstatus,sourcecodestatus "+
+			  "from tb_student a, tb_subsubmit b where a.stuid=b.stuid and classname like '"+classname+"%' and sname like '"+sname+"%'"+
+					"and classname in(select classname from tb_class where specid='"+specid+"
+  </select>
+</mapper>

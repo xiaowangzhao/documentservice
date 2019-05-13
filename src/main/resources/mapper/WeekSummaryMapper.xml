@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.test.demo.mapper.WeekSummaryMapper">
+  <resultMap id="BaseResultMap" type="com.test.demo.entity.WeekSummary">
+    <id column="stuid" jdbcType="VARCHAR" property="stuid" />
+    <id column="weekorder" jdbcType="INTEGER" property="weekorder" />
+    <result column="thiscontent" jdbcType="VARCHAR" property="thiscontent" />
+    <result column="support" jdbcType="VARCHAR" property="support" />
+    <result column="nextcontent" jdbcType="VARCHAR" property="nextcontent" />
+    <result column="tutorreply" jdbcType="VARCHAR" property="tutorreply" />
+    <result column="tutorreview" jdbcType="VARCHAR" property="tutorreview" />
+    <result column="operator" jdbcType="VARCHAR" property="operator" />
+    <result column="operatedtime" jdbcType="TIMESTAMP" property="operatedtime" />
+    <result column="ismodifed" jdbcType="SMALLINT" property="ismodifed" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    stuid, weekorder, thiscontent, support, nextcontent, tutorreply, tutorreview, operator, 
+    operatedtime, ismodifed
+  </sql>
+
+  <select id="selectByPrimaryKey" parameterType="com.test.demo.entity.WeekSummaryKey" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from tb_week
+    where stuid = #{stuid,jdbcType=VARCHAR}
+      and weekorder = #{weekorder,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="com.test.demo.entity.WeekSummaryKey">
+    delete from tb_week
+    where stuid = #{stuid,jdbcType=VARCHAR}
+      and weekorder = #{weekorder,jdbcType=INTEGER}
+  </delete>
+
+  <insert id="insert" parameterType="com.test.demo.entity.WeekSummary">
+    insert into tb_week (stuid, weekorder, thiscontent, 
+      support, nextcontent, tutorreply, 
+      tutorreview, operator, operatedtime, 
+      ismodifed)
+    values (#{stuid,jdbcType=VARCHAR}, #{weekorder,jdbcType=INTEGER}, #{thiscontent,jdbcType=VARCHAR}, 
+      #{support,jdbcType=VARCHAR}, #{nextcontent,jdbcType=VARCHAR}, #{tutorreply,jdbcType=VARCHAR}, 
+      #{tutorreview,jdbcType=VARCHAR}, #{operator,jdbcType=VARCHAR}, #{operatedtime,jdbcType=TIMESTAMP}, 
+      #{ismodifed,jdbcType=SMALLINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.test.demo.entity.WeekSummary">
+    insert into tb_week
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="stuid != null">
+        stuid,
+      </if>
+      <if test="weekorder != null">
+        weekorder,
+      </if>
+      <if test="thiscontent != null">
+        thiscontent,
+      </if>
+      <if test="support != null">
+        support,
+      </if>
+      <if test="nextcontent != null">
+        nextcontent,
+      </if>
+      <if test="tutorreply != null">
+        tutorreply,
+      </if>
+      <if test="tutorreview != null">
+        tutorreview,
+      </if>
+      <if test="operator != null">
+        operator,
+      </if>
+      <if test="operatedtime != null">
+        operatedtime,
+      </if>
+      <if test="ismodifed != null">
+        ismodifed,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="stuid != null">
+        #{stuid,jdbcType=VARCHAR},
+      </if>
+      <if test="weekorder != null">
+        #{weekorder,jdbcType=INTEGER},
+      </if>
+      <if test="thiscontent != null">
+        #{thiscontent,jdbcType=VARCHAR},
+      </if>
+      <if test="support != null">
+        #{support,jdbcType=VARCHAR},
+      </if>
+      <if test="nextcontent != null">
+        #{nextcontent,jdbcType=VARCHAR},
+      </if>
+      <if test="tutorreply != null">
+        #{tutorreply,jdbcType=VARCHAR},
+      </if>
+      <if test="tutorreview != null">
+        #{tutorreview,jdbcType=VARCHAR},
+      </if>
+      <if test="operator != null">
+        #{operator,jdbcType=VARCHAR},
+      </if>
+      <if test="operatedtime != null">
+        #{operatedtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="ismodifed != null">
+        #{ismodifed,jdbcType=SMALLINT},
+      </if>
+    </trim>
+  </insert>
+
+
+  <update id="updateByPrimaryKeySelective" parameterType="com.test.demo.entity.WeekSummary">
+    update tb_week
+    <set>
+      <if test="thiscontent != null">
+        thiscontent = #{thiscontent,jdbcType=VARCHAR},
+      </if>
+      <if test="support != null">
+        support = #{support,jdbcType=VARCHAR},
+      </if>
+      <if test="nextcontent != null">
+        nextcontent = #{nextcontent,jdbcType=VARCHAR},
+      </if>
+      <if test="tutorreply != null">
+        tutorreply = #{tutorreply,jdbcType=VARCHAR},
+      </if>
+      <if test="tutorreview != null">
+        tutorreview = #{tutorreview,jdbcType=VARCHAR},
+      </if>
+      <if test="operator != null">
+        operator = #{operator,jdbcType=VARCHAR},
+      </if>
+      <if test="operatedtime != null">
+        operatedtime = #{operatedtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="ismodifed != null">
+        ismodifed = #{ismodifed,jdbcType=SMALLINT},
+      </if>
+    </set>
+    where stuid = #{stuid,jdbcType=VARCHAR}
+      and weekorder = #{weekorder,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.test.demo.entity.WeekSummary">
+    update tb_week
+    set thiscontent = #{thiscontent,jdbcType=VARCHAR},
+      support = #{support,jdbcType=VARCHAR},
+      nextcontent = #{nextcontent,jdbcType=VARCHAR},
+      tutorreply = #{tutorreply,jdbcType=VARCHAR},
+      tutorreview = #{tutorreview,jdbcType=VARCHAR},
+      operator = #{operator,jdbcType=VARCHAR},
+      operatedtime = #{operatedtime,jdbcType=TIMESTAMP},
+      ismodifed = #{ismodifed,jdbcType=SMALLINT}
+    where stuid = #{stuid,jdbcType=VARCHAR}
+      and weekorder = #{weekorder,jdbcType=INTEGER}
+  </update>
+  <select id="countWeekSummaryBystuid" parameterType="String" resultType="Integer">
+
+   select count(*) from  tb_week where stuid= #{value}
+and (thiscontent is NOT null and thiscontent!='')
+and (support is not null and thiscontent!='')
+and (nextcontent is NOT null and thiscontent!='')
+and (tutorreply is NOT null  and thiscontent!='');
+  </select>
+</mapper>

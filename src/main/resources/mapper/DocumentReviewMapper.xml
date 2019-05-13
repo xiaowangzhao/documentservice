@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.test.demo.mapper.DocumentReviewMapper">
+  <resultMap id="BaseResultMap" type="com.test.demo.entity.DocumentReview">
+    <id column="subid" jdbcType="BIGINT" property="subid" />
+    <result column="stuid" jdbcType="VARCHAR" property="stuid" />
+    <result column="significance" jdbcType="REAL" property="significance" />
+    <result column="designcontent" jdbcType="REAL" property="designcontent" />
+    <result column="composeability" jdbcType="REAL" property="composeability" />
+    <result column="translationlevel" jdbcType="REAL" property="translationlevel" />
+    <result column="innovative" jdbcType="REAL" property="innovative" />
+    <result column="reviewtime" jdbcType="TIMESTAMP" property="reviewtime" />
+    <result column="reviewerid" jdbcType="CHAR" property="reviewerid" />
+    <result column="submitflag" jdbcType="CHAR" property="submitflag" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.test.demo.entity.DocumentReview">
+    <result column="reviewopinion" jdbcType="LONGVARCHAR" property="reviewopinion" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    subid, stuid, significance, designcontent, composeability, translationlevel, innovative, 
+    reviewtime, reviewerid, submitflag
+  </sql>
+  <sql id="Blob_Column_List">
+    reviewopinion
+  </sql>
+<select id="selectAll" resultMap="ResultMapWithBLOBs">
+  select * from tb_reviewdoc
+</select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from tb_reviewdoc
+    where subid = #{subid,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from tb_reviewdoc
+    where subid = #{subid,jdbcType=BIGINT}
+  </delete>
+  <delete id ="delectAll">
+    delete from tb_reviewdoc
+  </delete>
+
+  <insert id="insert" parameterType="com.test.demo.entity.DocumentReview">
+    insert into tb_reviewdoc (subid, stuid, significance, 
+      designcontent, composeability, translationlevel, 
+      innovative, reviewtime, reviewerid, 
+      submitflag, reviewopinion)
+    values (#{subid,jdbcType=BIGINT}, #{stuid,jdbcType=VARCHAR}, #{significance,jdbcType=REAL}, 
+      #{designcontent,jdbcType=REAL}, #{composeability,jdbcType=REAL}, #{translationlevel,jdbcType=REAL}, 
+      #{innovative,jdbcType=REAL}, #{reviewtime,jdbcType=TIMESTAMP}, #{reviewerid,jdbcType=CHAR}, 
+      #{submitflag,jdbcType=CHAR}, #{reviewopinion,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.test.demo.entity.DocumentReview">
+    insert into tb_reviewdoc
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="subid != null">
+        subid,
+      </if>
+      <if test="stuid != null">
+        stuid,
+      </if>
+      <if test="significance != null">
+        significance,
+      </if>
+      <if test="designcontent != null">
+        designcontent,
+      </if>
+      <if test="composeability != null">
+        composeability,
+      </if>
+      <if test="translationlevel != null">
+        translationlevel,
+      </if>
+      <if test="innovative != null">
+        innovative,
+      </if>
+      <if test="reviewtime != null">
+        reviewtime,
+      </if>
+      <if test="reviewerid != null">
+        reviewerid,
+      </if>
+      <if test="submitflag != null">
+        submitflag,
+      </if>
+      <if test="reviewopinion != null">
+        reviewopinion,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="subid != null">
+        #{subid,jdbcType=BIGINT},
+      </if>
+      <if test="stuid != null">
+        #{stuid,jdbcType=VARCHAR},
+      </if>
+      <if test="significance != null">
+        #{significance,jdbcType=REAL},
+      </if>
+      <if test="designcontent != null">
+        #{designcontent,jdbcType=REAL},
+      </if>
+      <if test="composeability != null">
+        #{composeability,jdbcType=REAL},
+      </if>
+      <if test="translationlevel != null">
+        #{translationlevel,jdbcType=REAL},
+      </if>
+      <if test="innovative != null">
+        #{innovative,jdbcType=REAL},
+      </if>
+      <if test="reviewtime != null">
+        #{reviewtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="reviewerid != null">
+        #{reviewerid,jdbcType=CHAR},
+      </if>
+      <if test="submitflag != null">
+        #{submitflag,jdbcType=CHAR},
+      </if>
+      <if test="reviewopinion != null">
+        #{reviewopinion,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+
+<select id="selectBytid" parameterType="String" resultMap="ResultMapWithBLOBs">
+  select *  from tb_reviewdoc
+    where  reviewerid =#{tid}
+</select>
+
+
+  <update id="updateByPrimaryKeySelective" parameterType="com.test.demo.entity.DocumentReview">
+    update tb_reviewdoc
+    <set>
+      <if test="stuid != null">
+        stuid = #{stuid,jdbcType=VARCHAR},
+      </if>
+      <if test="significance != null">
+        significance = #{significance,jdbcType=REAL},
+      </if>
+      <if test="designcontent != null">
+        designcontent = #{designcontent,jdbcType=REAL},
+      </if>
+      <if test="composeability != null">
+        composeability = #{composeability,jdbcType=REAL},
+      </if>
+      <if test="translationlevel != null">
+        translationlevel = #{translationlevel,jdbcType=REAL},
+      </if>
+      <if test="innovative != null">
+        innovative = #{innovative,jdbcType=REAL},
+      </if>
+      <if test="reviewtime != null">
+        reviewtime = #{reviewtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="reviewerid != null">
+        reviewerid = #{reviewerid,jdbcType=CHAR},
+      </if>
+      <if test="submitflag != null">
+        submitflag = #{submitflag,jdbcType=CHAR},
+      </if>
+      <if test="reviewopinion != null">
+        reviewopinion = #{reviewopinion,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where subid = #{subid,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.test.demo.entity.DocumentReview">
+    update tb_reviewdoc
+    set stuid = #{stuid,jdbcType=VARCHAR},
+      significance = #{significance,jdbcType=REAL},
+      designcontent = #{designcontent,jdbcType=REAL},
+      composeability = #{composeability,jdbcType=REAL},
+      translationlevel = #{translationlevel,jdbcType=REAL},
+      innovative = #{innovative,jdbcType=REAL},
+      reviewtime = #{reviewtime,jdbcType=TIMESTAMP},
+      reviewerid = #{reviewerid,jdbcType=CHAR},
+      submitflag = #{submitflag,jdbcType=CHAR},
+      reviewopinion = #{reviewopinion,jdbcType=LONGVARCHAR}
+    where subid = #{subid,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.test.demo.entity.DocumentReview">
+    update tb_reviewdoc
+    set stuid = #{stuid,jdbcType=VARCHAR},
+      significance = #{significance,jdbcType=REAL},
+      designcontent = #{designcontent,jdbcType=REAL},
+      composeability = #{composeability,jdbcType=REAL},
+      translationlevel = #{translationlevel,jdbcType=REAL},
+      innovative = #{innovative,jdbcType=REAL},
+      reviewtime = #{reviewtime,jdbcType=TIMESTAMP},
+      reviewerid = #{reviewerid,jdbcType=CHAR},
+      submitflag = #{submitflag,jdbcType=CHAR}
+    where subid = #{subid,jdbcType=BIGINT}
+  </update>
+</mapper>
